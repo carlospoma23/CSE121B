@@ -3,23 +3,23 @@
 /* DATA */
 
 // Step 1: Declare a new variable to hold information about yourself
-let myInformation={
-    name:'Carlos Poma',
-    photo:'images/myPicture.jpg',
-    favoriteFoods:['Ceviche', 'Lomo Saltado', 'Pollo a la brasa'],
-    hobbies:['Play the guitar','Play soccer','Learn about technology'],
-    placesLived:[
-        {
-            place:'Peru',
-            length:'35 years', 
-            language:'Spanish',
-        },
-        {
-            place:'USA',
-            length:'3 years',
-            language:'English',
-        },
-    ]
+let myInformation = {
+  name: "Carlos Poma",
+  photo: "images/myPicture.jpg",
+  favoriteFoods: ["Ceviche", "Lomo Saltado", "Pollo a la brasa"],
+  hobbies: ["Play the guitar", "Play soccer", "Learn about technology"],
+  placesLived: [
+    {
+      place: "Peru",
+      length: "35 years",
+      language: "Spanish",
+    },
+    {
+      place: "USA",
+      length: "3 years",
+      language: "English",
+    },
+  ],
 };
 
 // Step 2: Inside of the object, add a property named name with a value of your name as a string
@@ -41,45 +41,45 @@ let myInformation={
 /* OUTPUT */
 
 // Step 1: Assign the value of the name property (of the object declared above) to the HTML <span> element with an ID of name
-function setBasicInfo(info){
-    const myName=document.getElementById('name');
-    const myPicture=document.getElementById('photo');
-    myName.textContent=info.name;
-    myPicture.src=info.photo;
+function setBasicInfo(info) {
+  const myName = document.getElementById("name");
+  const myPicture = document.getElementById("photo");
+  myName.textContent = info.name;
+  myPicture.src = info.photo;
 }
 
-function setFavorityFood(info){
-    const myFoods=document.getElementById('favorite-foods');
-        info.favoriteFoods.forEach(
-        food =>{
-        let listFood=document.createElement('li');
-        listFood.textContent=food;
-        myFoods.append(listFood);
-        })
+function setFavorityFood(info) {
+  const myFoods = document.getElementById("favorite-foods");
+  info.favoriteFoods.forEach((food) => {
+    let listFood = document.createElement("li");
+    listFood.textContent = food;
+    myFoods.append(listFood);
+  });
 }
 
-function setHobbies(info){
-    const myHobbies=document.getElementById('hobbies');
-        info.hobbies.forEach(
-        hobby =>{
-        let listHobby=document.createElement('li');
-        listHobby.textContent=hobby;
-        myHobbies.append(listHobby);
-    })
+function setHobbies(info) {
+  const myHobbies = document.getElementById("hobbies");
+  info.hobbies.forEach((hobby) => {
+    let listHobby = document.createElement("li");
+    listHobby.textContent = hobby;
+    myHobbies.append(listHobby);
+  });
 }
 
-function setPlacesLived(info){
+function setPlacesLived(info) {
+  const myPlaces = document.getElementById("places-lived");
+  info.placesLived.forEach((place) => {
+    let dtPlaces = document.createElement("dt");
 
-
-
-
-
-
-
+    dtPlaces.textContent = place;
+    myPlaces.append(dtPlaces);
+  });
 }
+
 setBasicInfo(myInformation);
 setFavorityFood(myInformation);
 setHobbies(myInformation);
+setPlacesLived(myInformation);
 
 // Step 2: Assign the value of the photo property as the src attribute of the HTML <img> element with an ID of photo
 

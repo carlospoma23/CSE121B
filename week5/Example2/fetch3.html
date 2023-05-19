@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>JavaScript Fetch API</h1>
+    <h2>The fetch() Method</h2>
+    <p id="name"></p>
+    <p id="location"></p>
+    <p id="image"></p>
+    <p id="dedicated"></p>
+
+    <script>
+      const urlTrue =
+        "https://byui-cse.github.io/cse121b-course/week05/temples.json";
+
+      let listOfTemples = [];
+      let results = null;
+
+      async function getTemples(url) {
+        const response = await fetch(url);
+
+        if (response.ok) {
+          const dataObject = await response.json();
+          listOfTemples = dataObject;
+          output(listOfTemples);
+        }
+      }
+
+      function output(list) {
+        let name = list[0].templeName;
+
+        document.getElementById("name").innerHTML = name;
+        console.log(list[0].templeName);
+      }
+
+      getTemples(urlTrue);
+    </script>
+  </body>
+</html>

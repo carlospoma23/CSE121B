@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript Fetch API</h1>
+<h2>The fetch() Method</h2>
+<p id="demo1"></p>
+<p id="demo2"></p>
+
+<script>
+
+let url1="https://byui-cse.github.io/cse121b-course/week05/temples.json"
+
+async function getInformation(url) {
+
+  let response = await fetch(url);
+  let jsonData = await response.json;
+  
+  console.log(jsonData);
+  //document.getElementById("demo1").innerHTML=myText;
+  //document.getElementById("demo2").innerHTML = obj.templeName 
+}
+
+
+console.log(getInformation(url1));
+console.log('Hello World');
+
+</script>
+
+
+
+
+</body>
+</html>
+

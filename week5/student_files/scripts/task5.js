@@ -71,24 +71,30 @@ document.getElementById("message2").textContent = myDay;
 /* FETCH */
 // Step 1: Declare a global empty array variable to store a list of temples
 
-var lisOfTemples = [];
+let listOfTemples = [];
 
 function output(list) {
-  var articleElement = document.createElement("article");
-  var h3Element = document.createElement("h3");
-  var h4Element1 = document.createElement("h4");
-  var h4Element2 = document.createElement("h4");
-  var imgElement = document.createElement("img");
-  var htmlIdTemples = document.getElementById("temples");
-  h3Element.innerHTML = list.templeName;
-  h4Element1.innerHTML = list.location;
-  h4Element1.innerHTML = list.dedicated;
+  list.forEach((temple) => {
+    let articleElement = document.createElement("article");
+    let h3Element = document.createElement("h3");
+    let h4Element1 = document.createElement("h4");
+    let h4Element2 = document.createElement("h4");
+    let imgElement = document.createElement("img");
 
-  articleElement.appendChild(h3Element);
-  articleElement.appendChild(h4Element1);
-  articleElement.appendChild(h4Element2);
-  articleElement.appendChild(imgElement);
-  htmlIdTemples.appendChild(articleElement);
+    let htmlIdTemples = document.getElementById("temples");
+
+    h3Element.innerHTML = temple.templeName;
+    h4Element1.innerHTML = temple.location;
+    h4Element2.innerHTML = temple.dedicated;
+    imgElement.src = temple.imageUrl;
+    imgElement.alt = temple.templeName;
+
+    articleElement.appendChild(h3Element);
+    articleElement.appendChild(h4Element1);
+    articleElement.appendChild(h4Element2);
+    articleElement.appendChild(imgElement);
+    htmlIdTemples.appendChild(articleElement);
+  });
 }
 
 // Step 2: Declare a function named output that accepts a list of temples as an array argument and does the following for each temple:
@@ -99,14 +105,15 @@ function output(list) {
 // - Creates an HTML <img> element and add the temple's imageUrl property to the src attribute and the temple's templeName property to the alt attribute
 // - Appends the <h3> element, the two <h4> elements, and the <img> element to the <article> element as children
 // - Appends the <article> element to the HTML element with an ID of temples
-const url = "https://byui-cse.github.io/cse121b-course/week05/temples.json";
-
+const urlTrue = "https://byui-cse.github.io/cse121b-course/week05/temples.json";
+let results = null;
 async function getTemples(url) {
-  const myList = await fetch(url);
-  if (myList.ok) {
-    const lisOfTemples = await myList.json();
+  const response = await fetch(url);
+  if (response.ok) {
+    const dataObject = await response.json();
+    listOfTemples = dataObject;
+    output(listOfTemples);
   }
-  output(lisOfTemples);
 }
 
 // Step 3: Create another function called getTemples. Make it an async function.
@@ -114,15 +121,43 @@ async function getTemples(url) {
 // Step 5: Convert your fetch response into a Javascript object ( hint: .json() ). Store this in the templeList variable you declared earlier (Step 1). Make sure the the execution of the code waits here as well until it finishes.
 // Step 6: Finally, call the output function and pass it the list of temples. Execute your getTemples function to make sure it works correctly.
 
+getTemples(urlTrue);
+
 // Step 7: Declare a function named reset that clears all of the <article> elements from the HTML element with an ID of temples
 
+function reset() {
+  const htmlIdTemples = document.getElementById("temples");
+  htmlIdTemples.remove();
+}
 // Step 8: Declare a function named sortBy that does the following:
+
+function sortBy() {
+  //reset();
+  let sortByElement = document.getElementById("sortBy").options;
+  let indexElement = sortByElement.selectedIndex;
+  let listAscending = [];
+  let listDescending = [];
+
+  if (indexElement == 0) {
+    listAscending = listOfTemples.sort();
+    console.log(indexElement);
+    console.log(listAscending);
+    output(listAscending);
+  } else if (indexElement == 1) {
+    listDescending = listOfTemples.reverse();
+    console.log(indexElement);
+    console.log(listDescending);
+    output(listDescending);
+  }
+}
+
 // - Calls the reset function
+
 // - Sorts the global temple list by the currently selected value of the HTML element with an ID of sortBy
 // - Calls the output function passing in the sorted list of temples
 
 // Step 9: Add a change event listener to the HTML element with an ID of sortBy that calls the sortBy function
-
+document.getElementById("sortBy").addEventListener("change", sortBy);
 /* STRETCH */
 
 // Consider adding a "Filter by" feature that allows users to filter the list of temples

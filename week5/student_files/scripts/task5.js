@@ -138,12 +138,12 @@ function sortBy() {
   let listAscending = [];
   let listDescending = [];
 
-  if (indexElement == 0) {
+  if (indexElement === 0) {
     listAscending = listOfTemples.sort();
     console.log(indexElement);
     console.log(listAscending);
     output(listAscending);
-  } else if (indexElement == 1) {
+  } else if (indexElement === 1) {
     listDescending = listOfTemples.reverse();
     console.log(indexElement);
     console.log(listDescending);

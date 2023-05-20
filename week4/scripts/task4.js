@@ -10,7 +10,7 @@ let myInformation = {
   hobbies: ["Play the guitar", "Play soccer", "Learn about technology"],
   placesLived: [
     {
-      place: "Peru",
+      place: "PERU",
       length: "35 years",
       language: "Spanish",
     },
@@ -44,8 +44,11 @@ let myInformation = {
 function setBasicInfo(info) {
   const myName = document.getElementById("name");
   const myPicture = document.getElementById("photo");
+
   myName.textContent = info.name;
   myPicture.src = info.photo;
+  myPicture.alt=info.name;
+  
 }
 
 function setFavorityFood(info) {
@@ -55,6 +58,7 @@ function setFavorityFood(info) {
     listFood.textContent = food;
     myFoods.append(listFood);
   });
+  
 }
 
 function setHobbies(info) {
@@ -66,15 +70,27 @@ function setHobbies(info) {
   });
 }
 
-function setPlacesLived(info) {
-  const myPlaces = document.getElementById("places-lived");
-  info.placesLived.forEach((place) => {
-    let dtPlaces = document.createElement("dt");
 
-    dtPlaces.textContent = place;
-    myPlaces.append(dtPlaces);
+function setPlacesLived(info){
+  
+  info.placesLived.forEach((element) => {
+    let dtPlace = document.createElement("dt");
+    let ddLength=document.createElement("dd");
+    let ddLanguage=document.createElement("dd");
+    
+    dtPlace.innerHTML = `${element.place} :`;
+    ddLength.innerHTML = `- ${element.length}`;
+    ddLanguage.innerHTML= `- ${element.language}`;
+
+    let dlElement = document.getElementById("places-lived");
+    dlElement.appendChild(dtPlace); 
+    dlElement.appendChild(ddLength);
+    dlElement.appendChild(ddLanguage);
+
   });
+
 }
+
 
 setBasicInfo(myInformation);
 setFavorityFood(myInformation);

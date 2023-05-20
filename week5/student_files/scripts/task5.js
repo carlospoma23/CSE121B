@@ -72,7 +72,6 @@ document.getElementById("message2").textContent = myDay;
 // Step 1: Declare a global empty array variable to store a list of temples
 
 let listOfTemples = [];
-
 function output(list) {
   list.forEach((temple) => {
     let articleElement = document.createElement("article");
@@ -88,6 +87,8 @@ function output(list) {
     h4Element2.innerHTML = temple.dedicated;
     imgElement.src = temple.imageUrl;
     imgElement.alt = temple.templeName;
+    imgElement.width=200;
+    imgElement.height=230;
 
     articleElement.appendChild(h3Element);
     articleElement.appendChild(h4Element1);
@@ -126,29 +127,46 @@ getTemples(urlTrue);
 // Step 7: Declare a function named reset that clears all of the <article> elements from the HTML element with an ID of temples
 
 function reset() {
-  const htmlIdTemples = document.getElementById("temples");
-  htmlIdTemples.remove();
+  let htmlIdTemples = document.getElementById("temples");
+  htmlIdTemples.innerHTML="";
 }
 // Step 8: Declare a function named sortBy that does the following:
 
 function sortBy() {
-  //reset();
+  reset();
   let sortByElement = document.getElementById("sortBy").options;
   let indexElement = sortByElement.selectedIndex;
-  let listAscending = [];
-  let listDescending = [];
 
-  if (indexElement === 0) {
-    listAscending = listOfTemples.sort();
-    console.log(indexElement);
-    console.log(listAscending);
-    output(listAscending);
-  } else if (indexElement === 1) {
-    listDescending = listOfTemples.reverse();
-    console.log(indexElement);
-    console.log(listDescending);
-    output(listDescending);
+  if (indexElement == 0) {
+    listOfTemples.sort((a, b) => {
+      if (a.templeName < b.templeName) {
+        return -1;
+      } else if (a.templeName > b.templeName) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    //testing output in console
+    //console.log(indexElement);
+    //console.log(listOfTemples);
+    output(listOfTemples);
+  } else if (indexElement == 1) {
+    listOfTemples.sort((a, b) => {
+      if (a.templeName > b.templeName) {
+        return -1;
+      } else if (a.templeName < b.templeName) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    //testing output in console
+    //console.log(indexElement);
+    //console.log(listOfTemples);
+    output(listOfTemples);
   }
+
 }
 
 // - Calls the reset function
